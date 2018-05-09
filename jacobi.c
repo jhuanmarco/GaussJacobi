@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <math.h>
 
-#define EPSILON 0.00001;
+#define EPSILON 0.05;
 #define VAR_N 3; // system var count
 
 int stop2(double A[], double P[]){
@@ -122,18 +122,12 @@ void main(){
 		}
 
 		k++;
-		
+
 	} while (stop);
-
-
-		printf("\nATUAL\n");
-		for(int i = 0; i < var_n; i++){
-			printf("%lf\n", A[i]);
-		}
 
 		printf("\nPROXIMO\n");
 		for(int i = 0; i < var_n; i++){
-			printf("%lf\n", P[i]);
+			printf("x%d = %.10lf\n", i, P[i]);
 		}
 
 
