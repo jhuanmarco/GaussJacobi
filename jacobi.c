@@ -56,15 +56,11 @@ void main(){
 	double A[var_n]; // atual
 	double P[var_n]; // prox
 
-
-
 	double M[3][4] = {
 		{10,2,1,7},
 		{1,5,1,-8},
 		{2,3,10,6}
 	};
-
-
 
 	for(int i = 0; i < var_n; i++){
 		V[i] = M[i][i];
@@ -88,8 +84,6 @@ void main(){
 				aux -= (M[i][j]*A[j]);
 			}
 
-
-			//printf(")\n");
 			result *= aux;
 			P[i] = result;
 		}
@@ -106,11 +100,10 @@ void main(){
 		}
 
 		sleep(1);
-
 		*/
 
 		//stop = stop2(A, P);	// Max |P - A| < 3
-		//stop = stop2(A, P); // Max |P - A|/P < 3
+		stop = stop3(A, P); // Max |P - A|/P < 3
 		//stop = k < 4;
 
 		for(int i = 0; i < var_n; i++){
@@ -121,10 +114,10 @@ void main(){
 
 	} while (stop);
 
-		printf("\nX APROXIMADOS EM %d ITERACOES\n", k);
-		for(int i = 0; i < var_n; i++){
-			printf("x%d = %.10lf\n", i, P[i]);
-		}
+	printf("GAUSS JACOBI\nX APROXIMADOS EM %d ITERACOES\n", k);
+	for(int i = 0; i < var_n; i++){
+		printf("x%d = %.10lf\n", i, P[i]);
+	}
 
 
 
