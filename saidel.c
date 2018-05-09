@@ -65,15 +65,50 @@ void main(){
 	};
 
 	for(int i = 0; i < var_n; i++){
+		P[i] = 0;
+		V[i] = M[i][i];
+	}
+
+	
+	for(int i = 0; i < var_n; i++){
+
+		result = 1/V[i];		
+			aux = 0;
+
+			for (int j = 0; j < var_n; j++){
+				if(i == j) {
+					aux += M[i][var_n];
+					continue;
+				}
+				aux -= (M[i][j]*P[j]);
+			}
+			
+		result *= aux;
+		P[i] = result;
+		A[i] = P[i];
+
+	}
+
+	/*
+	for(int i = 0; i < var_n; i++){ //se a primeira iteracao possui ij/a e nao aplicar saidel na primeira. mas é dificil
+	
 		V[i] = M[i][i];
 		A[i] = M[i][var_n]/V[i];
 		P[i] = A[i];
-	}
 
-	int k = 0;
+	}*/
+
+	int k;
+	// k = 0;
+	k = 1; // pois utiliza uma iteracao para encontrar os x iniciais/ ou se pedir para começar em 0,0,0
+
 	int stop = 0;
 
 	do{	
+
+		k++;
+
+
 		for(int i = 0; i < var_n; i++){
 
 			result = 1/V[i];		
@@ -107,13 +142,14 @@ void main(){
 
 		//stop = stop2(A, P);	// Max |P - A| < 3
 		stop = stop3(A, P); // Max |P - A|/P < 3
-		//stop = k < 4;
+		//stop = k < 1; // 2 = numero de iteracoes pedido
+
 
 		for(int i = 0; i < var_n; i++){
 			A[i] = P[i];
 		}
 
-		k++;
+		
 
 	} while (stop);
 

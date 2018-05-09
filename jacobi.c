@@ -62,15 +62,24 @@ void main(){
 		{2,3,10,6}
 	};
 
+	
 	for(int i = 0; i < var_n; i++){
 		V[i] = M[i][i];
 		A[i] = M[i][var_n]/V[i];
 	}
+	
 
-	int k = 0;
+	int k;
+	// k = 0;
+	k = 1; // pois utiliza uma iteracao para encontrar os x iniciais/ ou se pedir para começar em 0,0,0
+	
 	int stop = 0;
 
 	do{	
+
+		k++; // logo sempre executa 2 iteracoes
+
+
 		for(int i = 0; i < var_n; i++){
 
 			result = 1/V[i];			
@@ -104,13 +113,13 @@ void main(){
 
 		//stop = stop2(A, P);	// Max |P - A| < 3
 		stop = stop3(A, P); // Max |P - A|/P < 3
-		//stop = k < 4;
+		//stop = k < 2; // 2 = numero de iteracoes pedido
 
 		for(int i = 0; i < var_n; i++){
 			A[i] = P[i];
 		}
 
-		k++;
+		
 
 	} while (stop);
 
