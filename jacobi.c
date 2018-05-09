@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <unistd.h>
 #include <math.h>
 
 #define EPSILON 0.05;
@@ -46,26 +47,6 @@ int stop3(double A[], double P[]){
 		return 1;
 }
 
-int stop1(double A[], double P[]){
-		double var_n = VAR_N;
-		double e = EPSILON;
-
-		double aux;
-		double maior = P[0];
-		maior = fabs(maior);
-
-		for(int i = 1; i < var_n; i++){
-			aux = fabs(P[i]);
-			if(aux < maior){
-				maior = aux;
-			}
-		}
-
-		if(maior > e) return 0;
-
-		return 1;
-}
-
 void main(){
 	int var_n = VAR_N;
 	double aux = 0;
@@ -91,6 +72,7 @@ void main(){
 	}
 
 	int k = 0;
+	int stop = 0;
 
 	do{	
 		for(int i = 0; i < var_n; i++){
@@ -112,10 +94,24 @@ void main(){
 			P[i] = result;
 		}
 
-		stop = stop1(A, P); // MaxP < 3
+		/*
+		printf("\nANTE\n");
+		for(int i = 0; i < var_n; i++){
+			printf("%.10lf\n", A[i]);
+		}
+
+		printf("\nPROXIMO\n");
+		for(int i = 0; i < var_n; i++){
+			printf("%.10lf\n", P[i]);
+		}
+
+		sleep(1);
+
+		*/
+
 		//stop = stop2(A, P);	// Max |P - A| < 3
-		//stop = stop3(A, P); // Max |P - A|/P < 3
-		//stop = stop < 4;
+		//stop = stop2(A, P); // Max |P - A|/P < 3
+		//stop = k < 4;
 
 		for(int i = 0; i < var_n; i++){
 			A[i] = P[i];
@@ -125,7 +121,7 @@ void main(){
 
 	} while (stop);
 
-		printf("\nPROXIMO\n");
+		printf("\nX APROXIMADOS EM %d ITERACOES\n", k);
 		for(int i = 0; i < var_n; i++){
 			printf("x%d = %.10lf\n", i, P[i]);
 		}
